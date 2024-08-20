@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập hàm</title>
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM2LcdJ5OGg4RuUJ0ekNIMBjNeZIms9K1LykVhg" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <button class="sidebar-btn active" onclick="showExercise(1)">
+                <i class="fas fa-user-graduate icon"></i> Quản lý tuyển sinh
+            </button>
+            <button class="sidebar-btn" onclick="showExercise(2)">
+                <i class="fas fa-bolt icon"></i> Tính tiền điện
+            </button>
+            <button class="sidebar-btn" onclick="showExercise(3)">
+                <i class="fas fa-file-invoice-dollar icon"></i> Tính thuế TNCN
+            </button>
+            <button class="sidebar-btn" onclick="showExercise(4)">
+                <i class="fas fa-tv icon"></i> Tính tiền cáp
+            </button>
+        </div>
+        <div class="content">
+
+            <!-- Exercise 1: Enrollment Management -->
+            <div id="exercise1" class="exercise active">
+                <h2>🎓 Quản lý tuyển sinh</h2>
+                <div class="suggestions">
+                    <p>💡 <strong>Gợi ý:</strong></p>
+                    <ul>
+                        <li>Nhập điểm chuẩn, khu vực, đối tượng và các điểm môn thi</li>
+                        <li>Tính tổng điểm sau khi cộng thêm điểm ưu tiên khu vực và đối tượng</li>
+                        <li>Xác định học sinh có đậu hay không dựa trên tổng điểm và điểm chuẩn</li>
+                    </ul>
+                </div>
+                <div class="input-group">
+                    <input type="number" id="diemChuan" placeholder="Điểm chuẩn" min="0">
+                    <select id="khuVuc">
+                        <option value="0">Khu vực A</option>
+                        <option value="1">Khu vực B (+1 điểm)</option>
+                        <option value="2">Khu vực C (+2 điểm)</option>
+                    </select>
+                    <select id="doiTuong">
+                        <option value="0">Đối tượng 1</option>
+                        <option value="1">Đối tượng 2 (+1 điểm)</option>
+                        <option value="2">Đối tượng 3 (+2 điểm)</option>
+                    </select>
+                    <input type="number" id="mon1" placeholder="Điểm môn 1" min="0" max="10">
+                    <input type="number" id="mon2" placeholder="Điểm môn 2" min="0" max="10">
+                    <input type="number" id="mon3" placeholder="Điểm môn 3" min="0" max="10">
+                </div>
+                <button class="calculate-btn" onclick="calculateEnrollment()">Kết Quả</button>
+                <div class="result" id="enrollmentResult"></div>
+            </div>
+
+            <!-- Exercise 2: Calculate Electricity Bill -->
+            <div id="exercise2" class="exercise">
+                <h2>💡 Tính Tiền Điện</h2>
+                <div class="suggestions">
+                    <p>💡 <strong>Gợi ý:</strong></p>
+                    <ul>
+                        <li>Nhập vào số điện đã sử dụng trong tháng</li>
+                        <li>Tính tiền điện theo bảng giá lũy tiến</li>
+                    </ul>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="fullName" placeholder="Nhập họ tên">
+                    <input type="number" id="electricityUsage" placeholder="Nhập số kWh" min="0">
+                </div>
+                <button class="calculate-btn" onclick="calculateElectricityBill()">Tính Tiền Điện</button>
+                <div class="result" id="electricityResult"></div>
+            </div>
+
+            <!-- Exercise 3: Personal Income Tax Calculation -->
+            <div id="exercise3" class="exercise">
+                <h2>💰 Tính Thuế Thu Nhập Cá Nhân</h2>
+                <div class="suggestions">
+                    <p>💡 <strong>Gợi ý:</strong></p>
+                    <ul>
+                        <li>Nhập vào Họ tên, Tổng thu nhập năm, Số người phụ thuộc</li>
+                        <li>Tính thu nhập chịu thuế và thuế thu nhập cá nhân phải nộp</li>
+                    </ul>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="fullName" placeholder="Nhập Họ tên">
+                    <input type="number" id="totalIncome" placeholder="Tổng thu nhập năm (VND)" min="0">
+                    <input type="number" id="dependents" placeholder="Số người phụ thuộc" min="0">
+                </div>
+                <button class="calculate-btn" onclick="calculateIncomeTax()">Tính Tiền Thuế</button>
+                <div class="result" id="taxResult"></div>
+            </div>
+
+            <!-- Exercise 4: Cable Bill Calculation -->
+            <div id="exercise4" class="exercise">
+                <h2>📺 Tính Tiền Cáp</h2>
+                <div class="suggestions">
+                    <p>💡 <strong>Gợi ý:</strong></p>
+                    <ul>
+                        <li>Nhập mã khách hàng, loại khách hàng, số kết nối (nếu là doanh nghiệp), và số kênh cao cấp</li>
+                        <li>Tính tiền cáp dựa trên loại khách hàng</li>
+                    </ul>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="customerID" placeholder="Nhập Mã Khách Hàng">
+                    <select id="customerType" onchange="toggleConnectionField()">
+                        <option value="residential">Nhà Dân</option>
+                        <option value="business">Doanh Nghiệp</option>
+                    </select>
+                    <input type="number" id="connections" placeholder="Số kết nối" style="display:none;" min="0">
+                    <input type="number" id="premiumChannels" placeholder="Số kênh cao cấp" min="0">
+                </div>
+                <button class="calculate-btn" onclick="calculateCableBill()">Tính Tiền Cáp</button>
+                <div class="result" id="cableResult"></div>
+            </div>
+        </div>
+    </div>
+    <script src="./js/script.js"></script>
+</body>
+</html>
